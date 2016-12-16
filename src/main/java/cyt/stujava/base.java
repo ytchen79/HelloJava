@@ -1,5 +1,8 @@
 package cyt.stujava;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @Description: TODO
  * @Function List: TODO
@@ -8,11 +11,16 @@ package cyt.stujava;
  */
 public class base {
     public static void main(String[] args){
-        int number1=3;
-        int number2=3;
-        number2+=number1+number2;
-        System.out.println(number2);
-
+        List<String> list1=new ArrayList<String>();
+        List<String> list2=new ArrayList<String>();
+        List<String> list3=new ArrayList<String>();
+        list1.add("chen1");
+        list1.add("chen2");
+        list3.addAll(list1);
+        list2.add("chen3");
+        list2.add("chen4");
+        list3.addAll(list2);
+        System.out.println(list3.toString());
 
     }
 }

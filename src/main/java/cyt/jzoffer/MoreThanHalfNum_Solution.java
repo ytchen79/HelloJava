@@ -91,7 +91,6 @@ public class MoreThanHalfNum_Solution {
             }
         }
         return hit;
-
     }
 
 
