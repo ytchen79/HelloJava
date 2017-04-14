@@ -3,6 +3,7 @@ package baidu.map;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import cyt.utils.myFile;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -79,10 +80,10 @@ public class GetSuggestionPlace {
         }
         return null;
     }
-    public Set getRegionAll(String query, String region) {
-        Set res= new HashSet();
+    public Vector getRegionAll(String query, String region) {
+        Vector res= new Vector();
         try{
-            int totalPage=getTotalNumber( query,  region);
+            int totalPage=getTotalNumber(query, region);
             for(int i=0;i<totalPage;i++){
                 res.addAll(getOnePage(query,region,i));
             }
@@ -105,6 +106,39 @@ public class GetSuggestionPlace {
                     "&scope=1" +
                     //      "&city_limit=true" +
                     "&region=" + region;
+            System.out.println("searchURL:"+searchURL);
+            URL resjson = new URL(searchURL);
+            BufferedReader in = new BufferedReader(new InputStreamReader(resjson.openStream()));
+            String res;
+            StringBuilder all = new StringBuilder("");
+            while ((res = in.readLine()) != null) {
+                all.append(res.trim());
+            }
+            in.close();
+            JSONObject jsonObject= JSON.parseObject(all.toString());
+
+            if(jsonObject.containsKey("total")){
+                total=jsonObject.getIntValue("total");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+    public int getTotalNumberbyGPS(String query, String regionGPS) {
+        int total=-1;
+        try{
+            query = URLEncoder.encode(query, "UTF-8");
+            regionGPS = URLEncoder.encode(regionGPS, "UTF-8");
+            String searchURL="http://api.map.baidu.com/place/v2/search?ak=" + BAIDU_APP_KEY +
+                    "&output=json" +
+                    "&query=" + query +
+                    "&page_size=" +page_size+
+                    //  "&page_num=0" +
+                    "&scope=1" +
+                    //      "&city_limit=true" +
+                    "&location=" + regionGPS;
             System.out.println("searchURL:"+searchURL);
             URL resjson = new URL(searchURL);
             BufferedReader in = new BufferedReader(new InputStreamReader(resjson.openStream()));
@@ -148,13 +182,23 @@ public class GetSuggestionPlace {
             JSONObject jsonObject= JSON.parseObject(all.toString());
             JSONObject jsonTmp;
             JSONArray jsonArray;
-            if(!jsonObject.getString("results").equals("")){
-                jsonArray=JSON.parseArray(jsonObject.getString("results"));
-                for(int i=0;i<jsonArray.size();i++){
-                    jsonTmp=jsonArray.getJSONObject(i);
-                    res.add(jsonTmp.getString("location"));
+            if(jsonObject.containsKey("status")){
+                int status=jsonObject.getIntValue("status");
+                if(status==0){
+                    if(!jsonObject.getString("results").equals("")){
+                        jsonArray=JSON.parseArray(jsonObject.getString("results"));
+                        for(int i=0;i<jsonArray.size();i++){
+                            jsonTmp=jsonArray.getJSONObject(i);
+                            //  System.out.println(jsonTmp.toJSONString());
+                           // res.add(jsonTmp.getString("location"));
+                             res.add(jsonTmp);
+                        }
+                    }
+                }else{
+                    return null;
                 }
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,14 +210,24 @@ public class GetSuggestionPlace {
         System.out.println("<--start-->");
         GetSuggestionPlace g=new GetSuggestionPlace();
 //        FileUtils.AppendToFileA("f:\\getSuggestion.txt", start+":"+g.getSuggestion("西湖镇","湖南省"));
-
-        System.out.println(g.getTotalNumber("汽车,维修","厦门"));
-        System.out.println(g.getTotalNumber("汽车,修理","厦门"));
-        System.out.println(g.getTotalNumber("汽车,服务站","厦门"));
-        System.out.println(g.getTotalNumber("汽车,服务","厦门"));
-        System.out.println(g.getTotalNumber("汽车,修理厂", "厦门"));
-   //     System.out.println(g.getRegionAll("汽车,修理厂,服务站", "北京"));
+//
+//        System.out.println(g.getTotalNumber("汽车,维修","厦门"));
+//        System.out.println(g.getTotalNumber("汽车,修理","厦门"));
+//        System.out.println(g.getTotalNumber("服务站","厦门"));
+//        System.out.println(g.getTotalNumber("汽车,服务站","厦门"));
+//        System.out.println(g.getTotalNumber("汽车,服务","厦门"));
+//        System.out.println(g.getTotalNumber("汽车,修理厂", "厦门"));
+        System.out.println(g.getTotalNumberbyGPS("服务站", "24.490474,118.11022"));
+        System.out.println(g.getTotalNumberbyGPS("服务站", "24.44543,118.08233"));
+        System.out.println(g.getTotalNumberbyGPS("服务站", "24.48461,118.03289"));
+        System.out.println(g.getTotalNumberbyGPS("服务站", "24.51253,118.14621"));
+        System.out.println(g.getTotalNumberbyGPS("服务站", "24.57584,118.09719"));
+        System.out.println(g.getTotalNumberbyGPS("服务站", "24.72308,118.15197"));
+        System.out.println(g.getTotalNumberbyGPS("服务站", "24.61863,118.24783"));
+        //System.out.println(g.getRegionAll("服务站", "北京"));
       //  System.out.println(g.getSuggestion("内蒙古万佳小学","鄂尔多斯市"));
+//        String str="{\"address\":\"山东庄镇桥头营大街29\",\"detail\":1,\"location\":{\"lat\":40.167763,\"lng\":117.154371},\"name\":\"福山汽车修理厂\",\"street_id\":\"2c0bd6c57b47d5b343ab9a26\",\"telephone\":\"(010)60938088\",\"uid\":\"2c0bd6c57b47d5b343ab9a26\"}";
+//        myFile.AppendToFileA("D:\\stationGPS3-13.txt", str);
         System.out.println("--end-->"+(System.currentTimeMillis()-start));
     }
 }

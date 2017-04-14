@@ -19,9 +19,10 @@ public class myFile {
         try {
             RandomAccessFile rf = new RandomAccessFile(fileName, "rw");
             rf.seek(rf.length()); // 将指针移动到文件末尾
-            rf.writeBytes("\r\n" + content); // 字符串末尾需要换行符hhh
-
-            rf.close();// 关闭文件流
+         //   rf.writeBytes("\r\n"); // 字符串末尾需要换行符hhh
+           // rf.writeUTF(content);
+            rf.write(("\n" + content ).getBytes());
+          rf.close();// 关闭文件流
         } catch (IOException e) {
             e.printStackTrace();
         }
