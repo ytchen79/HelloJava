@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cf27579-eaec-4354-8c8f-43b3afbc9450" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/paper/normal.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cyt/utils/myFile.class" afterPath="$PROJECT_DIR$/target/classes/cyt/utils/myFile.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/baidu/map/GetSuggestionPlace.java" afterPath="$PROJECT_DIR$/src/main/java/baidu/map/GetSuggestionPlace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HelloJava.iml" afterPath="$PROJECT_DIR$/HelloJava.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cyt/utils/myFile.java" afterPath="$PROJECT_DIR$/src/main/java/cyt/utils/myFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HelloJava.iws" />
@@ -474,7 +468,7 @@
       <workItem from="1483676704094" duration="2797000" />
       <workItem from="1488852323992" duration="656000" />
       <workItem from="1489391297423" duration="28808000" />
-      <workItem from="1490505952055" duration="17541000" />
+      <workItem from="1490505952055" duration="17579000" />
     </task>
     <task id="LOCAL-00001" summary="添加百度API">
       <created>1481871071521</created>
@@ -482,11 +476,17 @@
       <option name="project" value="LOCAL" />
       <updated>1481871071521</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="添加activemq">
+      <created>1492145954500</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1492145954500</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126055000" />
+    <option name="totallyTimeSpent" value="126093000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1616" height="876" extended-state="0" />
@@ -531,7 +531,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加百度API" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加百度API" />
+    <MESSAGE value="添加activemq" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加activemq" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
